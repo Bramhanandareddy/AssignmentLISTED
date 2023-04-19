@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .rounded-lg {
+            border-radius: 1rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+        }
+        .dashboard-card {
+            background-color: #FFFFFF;
+            border-radius: 1rem;
+        }
+
+        .dashboard-card:nth-child(1) {
+            background-color: #A7F3D0;
+        }
+
+        .dashboard-card:nth-child(2) {
+            background-color: #FEEBC8;
+        }
+
+        .dashboard-card:nth-child(3) {
+            background-color: #FECACA;
+        }
+
+        .dashboard-card:nth-child(4) {
+            background-color: #E9D4F0;
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 0.5fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-200">
+    <div class="h-screen flex">
+        <div class="w-60 h-500 bg-black text-white flex flex-col justify-center items-center rounded-lg mt-20 mb-20">
+            <div class="flex items-center mb-4">
+                <p class="text-4xl justify-left">Board.</p>
+            </div>
+            <img src="logo-dashboard.png" alt="Dashboard" class="logo mb-1"><br>
+            <img src="logo-transactions.png" alt="Transactions" class="logo mb-2"><br>
+            <img src="logo-schedules.png" alt="Schedules" class="logo mb-2"><br>
+            <img src="logo-users.png" alt="Users" class="logo mb-2"><br>
+            <img src="logo-settings.png" alt="Settings" class="logo mb-2"><br>
+            <div class="flex-grow"></div>
+            <p class="text-xs mb-2">Help</p>
+            <p class="text-xs justify-left mb-2">Contact Us</p>
+        </div>
+       
+        <div class="flex-grow bg-white p-2">
+            <h1 class="text-2xl font-semibold mb-4">Dashboard</h1>
+            <div class="dashboard-content">
+                <div class="dashboard-card rounded-lg">
+                    <div class="flex items-center justify-between mb-1">
+                        <div>
+                            <p class="text-lg font- very small">Total Revenues</p>
+                            <p class="text-sm text-black-500"><b>$2,129,430</b></p>
+                        </div>
+                        <img src="logo-revenues.png" alt="Total Revenues" class="logo">
+                    </div>
+                </div>
+                <div class="dashboard-card rounded-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-lg font-small">Total Transactions</p>
+                            <p class="text-sm text-black-500"><b>1,520</b></p>
+                        </div>
+                        <img src="logo-transactions.png" alt="Total Transactions" class="logo">
+                    </div>
+                </div>
+                <div class="dashboard-card rounded-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-lg font-small">Total Likes</p>
+                            <p class="text-sm text-black-500"><b>9,721</b></p>
+                        </div>
+                        <img src="logo-users.png" alt="Total Likes" class="logo">
+                    </div>
+                </div>
+                <div class="dashboard-card rounded-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-lg font-small">Total Users</p>
+                            <p class="text-sm text-black-500"><b>892</b></p>
+                        </div>
+                        <img src="logo-messages.png" alt="Total Users" class="logo">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-transparent-200 p-1">
+                <div class="bg-white p-1 rounded-lg shadow-md">
+                    <h1 class="text-2xl font-semibold mb-6">Activity</h1>
+                    <div class="w-full h-30">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            
+                <script>
+                    var data = {
+                        labels: ["0","Week 1", "Week 2", "Week 3", "Week 4"],
+                        datasets: [{
+                            label: 'Guests',
+                            borderColor: 'red',
+                            data: [200, 390, 200, 300, 235],
+
+                            fill: false,
+                            tension:0.4
+                        },
+                        {
+                            label: 'Users',
+                            borderColor: 'green',
+                            data: [100, 490, 150, 440, 195],
+                            fill: false,
+                            tension:0.4
+                        }]
+                    };
+                    var options = {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 600
+                            }
+                        }
+                    };
+                    var lineChart = new Chart(document.getElementById('lineChart'), {
+                        type: 'line',
+                        data: data,
+                        options: options
+                    });
+                </script>
+                 <div class="bg-black-50 p-5">
+                    <div class=" w-96 h-15 bg-white p-1 rounded-lg shadow-md">
+                        <h1 class="text-2x1 font-semibold mb-1">Top Products</h1>
+                        <div class="w-50">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var pieData = {
+                            labels: ["Basic Tees", "Custom Short Pants", "Super Hoodies"],
+                            datasets: [{
+                            data: [55, 31, 14],
+                            backgroundColor: [
+                                'rgba(77,179,0, 0.6)',
+                                'rgba(255, 255, 0, 0.6)',
+                                'rgba(255, 0, 0, 0.6)',
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#fff'
+                        }]
+                    };
+                    var pieOptions = {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                fontColor: '#333',
+                                fontSize: 12,
+                                padding: 8
+                            }
+                        }
+                    };
+                    var pieChart = new Chart(document.getElementById('pieChart'), {
+                        type: 'pie',
+                        data: pieData,
+                        options: pieOptions
+                    });
+                    </script>
+                <div class="bg-black-200">
+                    <div class="flex justify-right items-center h-50">
+                        <div class="w-80 bg-white p-4 rounded-lg shadow-md">
+                            <h1 class="text-2xl font-bold mb-4">Today Schedule</h1>
+                            <div class="flex flex-col space-y-2">
+                                <div class="flex items-start">
+                                    <div class="w-4 h-4 flex-shrink-0 bg-green-500 line-full mr-2"></div>
+                                    <p class="text-gray-800">Meeting with suppliers at Kuta Bali<br>14:00-15:00<br>at sunset Road, Kuta Bali</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-4 h-4 flex-shrink-0 bg-blue-500 line-full mr-2"></div>
+                                    <p class="text-gray-800">Check operation at Giga Factory 1<br>18:00-20:00<br>at central Jakarta</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</body>
+</html>
